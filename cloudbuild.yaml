@@ -30,20 +30,20 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/datadogazm:01', '.']
+           'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01', '.']
   # [END cloudbuild_go_image_yaml]
   
   # [START cloudbuild_go_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/datadogazm:01']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01']
   # [END cloudbuild_go_push_yaml]
   
   # [START cloudbuild_go_deploy_yaml]
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'helloworld', 
-           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/datadogazm:01', 
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01', 
            '--region', 'us-central1', '--platform', 'managed']
   # [END cloudbuild_go_deploy_yaml]
 
@@ -58,5 +58,5 @@ artifacts:
 # [END cloudbuild_go_logs_yaml]
 # Store images in Google Artifact Registry
 images:
-  - us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/datadogniro:01
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01
 # [END cloudbuild_go_yaml]
