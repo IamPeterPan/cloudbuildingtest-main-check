@@ -39,10 +39,12 @@ steps:
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01']
   # [END cloudbuild_go_push_yaml]
   
+  
+  
   # [START cloudbuild_go_deploy_yaml]
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'helloworld', 
+    args: ['run', 'deploy', 'cloudbuildingtest', 
            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01', 
            '--region', 'us-central1', '--platform', 'managed']
   # [END cloudbuild_go_deploy_yaml]
