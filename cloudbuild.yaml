@@ -52,7 +52,7 @@ steps:
 #BUCKET_NAME: 'artifacts_write-go-csv-in-gcp-334404_niro'
 artifacts:
   objects:
-    location: gs://$_BUCKET_NAME/
+    location: gs://cloud-computing-project-2022/logs
     paths:
       - 01_test_log.xml
 # [END cloudbuild_go_logs_yaml]
