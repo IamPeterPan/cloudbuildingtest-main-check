@@ -122,4 +122,7 @@
     - 'push'
     - 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1.0'
   
- 
+# Store images in Google Artifact Registry
+images:
+  - gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1.0
+# [END cloudbuild_go_yaml]
