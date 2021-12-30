@@ -29,13 +29,13 @@ steps:
   # [START cloudbuild_go_image_yaml]
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', ,'gcr.io/${_PROJECT}/${_CONTAINERNAME}:${_VERSION}','.']
+    args: ['build', '-t', ,'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/${_CONTAINERNAME}:${_VERSION}','.']
   # [END cloudbuild_go_image_yaml]
   
   # [START cloudbuild_go_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/${_PROJECT}/${_CONTAINERNAME}:${_VERSION}']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/${_CONTAINERNAME}:${_VERSION}']
 #    #'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/dataazmolk:01']
   # [END cloudbuild_go_push_yaml]
   
@@ -45,7 +45,7 @@ steps:
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'cloud-computing-assignment', 
-           '--image=gcr.io/${_PROJECT}/${_CONTAINERNAME}:${_VERSION}', 
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/${_CONTAINERNAME}:${_VERSION}', 
            '--region', 'us-central1', '--platform', 'managed']
   # [END cloudbuild_go_deploy_yaml]
 
@@ -60,14 +60,13 @@ artifacts:
 # [END cloudbuild_go_logs_yaml]
 # Store images in Google Artifact Registry
 images:
-  - gcr.io/${_PROJECT}/${_CONTAINERNAME}:${_VERSION}
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/${_CONTAINERNAME}:${_VERSION}
 # [END cloudbuild_go_yaml]
 
 
 substitutions:
     #GCP Specific configuration. Please DON'T change anything
-    _PROJECT: cloud-computing-project-2022
-    _ZONE: us-central1-a
+   
     _GKE_CLUSTER: cloud-computing-assignment
     
     #Repository Specific configuration. DevOps can change this settings
