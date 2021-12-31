@@ -8,7 +8,8 @@ COPY go.sum ./
 RUN go mod download
 COPY . .
 
-RUN go build -o main -a /main.go
+RUN go build -o main 
+# -a /main.go
 FROM debian:buster-slim
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     ca-certificates && \
