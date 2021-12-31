@@ -55,7 +55,7 @@
     env:
     - 'CLOUDSDK_COMPUTE_REGION=us-central1'
     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
-   - name: 'gcr.io/cloud-builders/kubectl'
+#    - name: 'gcr.io/cloud-builders/kubectl'
 #     id: Destroy
 #     args:
 #     - 'delete'
