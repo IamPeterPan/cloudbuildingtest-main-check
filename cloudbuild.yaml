@@ -12,7 +12,7 @@
       - |
         go get -u github.com/jstemmer/go-junit-report
         2>&1 go test -timeout 1m -v ./... | tee sponge.log
-        /go/bin/go-junit-report -set-exit-code < sponge.log > $COMMIT_SHA_test_log.xml
+        /go/bin/go-junit-report -set-exit-code < sponge.log > ${COMMIT_SHA}_test_log.xml
   # [END cloudbuild_go_test_yaml]
   - name: 'gcr.io/cloud-builders/git'
     id: 'Clone'
