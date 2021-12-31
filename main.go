@@ -3,44 +3,14 @@ package main
 
 import (
     "fmt"
-//     "encoding/csv"
     "net/http"
     "log"
     "os"
+    "time"
 )
 
 
-// func main() {
-//     log.Print("starting server...")
 
-//     records := [][]string{
-//         {"date", "time", "currency"},
-//         {"11/11/2021", "3:00 PM", "BTC 1"},
-//         {"12/10/2021", "4:00 PM", "BTC 2"},
-//         {"10/10/2021", "5:00 PM", "BTC 3"},
-//         {"13/11/2021", "6:00 PM", "BTC 4"},
-//         {"14/10/2021", "7:00 PM", "BTC 5"},
-//         {"15/10/2021", "8:00 PM", "BTC 6"},
-        
-//     }
-
-//     f, err := os.Create("users.csv")
-//     defer f.Close()
-
-//     if err != nil {
-
-//         log.Fatalln("failed to open file", err)
-//     }
-
-//     w := csv.NewWriter(f)
-//     defer w.Flush()
-
-//     for _, record := range records {
-//         if err := w.Write(record); err != nil {
-//             log.Fatalln("error writing record to file", err)
-//         }
-//     }
-// }
 
 
 func main() {
@@ -64,29 +34,13 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 	name := os.Getenv("NAME")
 	today := time.Now().Format("01-02-2006")
+	hours, minutes, _ := time.Now().Clock()
+	currUTCTimeInString := fmt.Sprintf("%d:%02d", hours, minutes)
 	if name == "" {
 		
 		name ="BTC 1"
 	}
-	fmt.Fprintf(w, today, " %s!\n ","3:00 PM %s!\n , ", name)
+	fmt.Fprintf(w, today, " ,\n ",currUTCTimeInString , " ,\n ", name)
 	
-// 	records := [][]string{
-// 		{today, "3:00 PM", name},       
-//     	}
 
-//    	f, err := os.Create("users.csv")
-// 	defer f.Close()
-
-//     	if err != nil {
-// 		log.Fatalln("failed to open file", err)
-// 	}
-
-//     	w := csv.NewWriter(f)
-//     	defer w.Flush()
-
-//     	for _, record := range records {
-// 		if err := w.Write(record); err != nil {
-// 			log.Fatalln("error writing record to file", err)
-// 		}
-// 	}
 }
