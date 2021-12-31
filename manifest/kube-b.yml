@@ -19,8 +19,8 @@ spec:
         version: "v1"
     spec:
       containers:
-        - name: dataazmolk-sha256-1
-          image: 'us-central1-docker.pkg.dev/cloud-computing-project-2022/cloudbuildingtest-main-check/dataazmolk@sha256:fafaa08c1c48bf203ee4cb951caa83c5d116113672f35177857d0ba66cef34d0:v1'
+        - name: cloud-computing-assignment
+          image: 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1.0'
           ports:
             - containerPort: 8080
           readinessProbe:
