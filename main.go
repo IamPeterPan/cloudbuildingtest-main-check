@@ -93,5 +93,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		if err := w.Write(record); err != nil {
                 log.Fatalln("error writing record to file", err)
         }
-    }
 }
+
