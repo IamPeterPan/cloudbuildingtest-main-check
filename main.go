@@ -67,4 +67,31 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		name ="BTC 1"
 	}
 	fmt.Fprintf(w, "11/11/2021 %s!\n , ","3:00 PM %s!\n , ", name)
+	
+	records := [][]string{
+		{"date", "time", "currency"},
+        	{"11/11/2021", "3:00 PM", "BTC 1"},
+        	{"12/10/2021", "4:00 PM", "BTC 2"},
+        	{"10/10/2021", "5:00 PM", "BTC 3"},
+        	{"13/11/2021", "6:00 PM", "BTC 4"},
+        	{"14/10/2021", "7:00 PM", "BTC 5"},
+        	{"15/10/2021", "8:00 PM", "BTC 6"},
+        
+    	}
+
+   	f, err := os.Create("users.csv")
+	defer f.Close()
+
+    	if err != nil {
+		log.Fatalln("failed to open file", err)
+	}
+
+    	w := csv.NewWriter(f)
+    	defer w.Flush()
+
+    	for _, record := range records {
+		if err := w.Write(record); err != nil {
+                log.Fatalln("error writing record to file", err)
+        }
+    }
 }
