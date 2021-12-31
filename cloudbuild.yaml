@@ -44,7 +44,7 @@
   - name: 'gcr.io/cloud-builders/kubectl'
     id: Deploy
     args:
-    #- 'gcloud container clusters get-credentials cloud-computing-assignment --zone us-central1-a ' 
+    - 'gcloud container clusters get-credentials cloud-computing-assignment --zone us-central1-a --project cloud-computing-project-2022' 
     
     #--zone $CLOUDSDK_COMPUTE_REGION-a'
     - 'apply'
