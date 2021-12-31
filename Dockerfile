@@ -1,12 +1,12 @@
-FROM golang:1.16-buster as build
+FROM golang:1.16-buster as builder
 
-WORKDIR /
-# COPY go.mod ./
-# COPY go.sum ./
+WORKDIR /build
+COPY go.mod ./
+COPY go.sum ./
 # ADD . /
-COPY *.go ./
+# COPY *.go ./
 RUN go mod download
-COPY . ./
+COPY . .
 
 RUN go build -o main -a /main.go
 FROM debian:buster-slim
@@ -14,8 +14,6 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 # FROM gcr.io/distroless/base
-COPY --from=build /main /
+COPY --from=builder build/main /
 # EXPOSE 8080
-ENTRYPOINT [ "/main" ]
-
-
+ENTRYPOINT [ "/build/main" ]
