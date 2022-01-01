@@ -76,7 +76,7 @@
 
 # Store images in Google Artifact Registry
 images:
-  - gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA.0
+  - gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA
   
   
   
