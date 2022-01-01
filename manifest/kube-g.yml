@@ -19,8 +19,8 @@ spec:
         version: "v2"
     spec:
       containers:
-        - name: cloudbuildingtest-main-check-sha256-1
-          image: 'gcr.io/cloud-computing-project-2022/cloudbuildingtest-main-check@sha256:52c172a0853b342fdbf52b028c8efa0ea260243451fc0ee948206a64c4500067:v2'
+        - name: cloud-computing-assignment
+          image: 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA'
           ports:
             - containerPort: 8080
           readinessProbe:
