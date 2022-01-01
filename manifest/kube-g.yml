@@ -19,7 +19,7 @@ spec:
         version: "v2"
     spec:
       containers:
-        - name: cloud-computing-assignment-service-image
+        - name: cloud-computing-assignment
           image: 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA'
           ports:
             - containerPort: 8080
