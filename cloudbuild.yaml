@@ -38,24 +38,28 @@
     - 'push'
     - 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA.0'
     
-    
-    # This step deploys the new version of our container image
-  # in the hello-cloudbuild Kubernetes Engine cluster.
   - name: 'gcr.io/cloud-builders/kubectl'
-    id: Deploy
-    args:
-    - 'gcloud container clusters get-credentials cloud-computing-assignment --zone us-central1-a --project cloud-computing-project-2022' 
-    
-    #--zone $CLOUDSDK_COMPUTE_REGION-a'
-    - 'apply'
-    - '-f'
-    - '/manifest/kube-b.yml'
-    
-    
+    args: ['apply', '-f', 'manifest/']
     env:
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-    - 'CLOUDSDK_COMPUTE_REGION=us-central1'
     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
+    # This step deploys the new version of our container image
+  # in the hello-cloudbuild Kubernetes Engine cluster.
+#   - name: 'gcr.io/cloud-builders/kubectl'
+#     id: Deploy
+#     args:
+#     - 'gcloud container clusters get-credentials cloud-computing-assignment --zone us-central1-a --project cloud-computing-project-2022' 
+    
+#     #--zone $CLOUDSDK_COMPUTE_REGION-a'
+#     - 'apply'
+#     - '-f'
+#     - '/manifest/kube-b.yml'
+    
+    
+#     env:
+#     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+#     - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+#     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
 #    - name: 'gcr.io/cloud-builders/kubectl'
 #     id: Destroy
 #     args:
