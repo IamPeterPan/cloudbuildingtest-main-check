@@ -40,39 +40,23 @@
     - 'push'
     - 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA'
     
-  - name: 'gcr.io/cloud-builders/kubectl'
-    id: 'Deploy Image'
-    args: ['apply', '-f', 'manifest/']
-    env:
-    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
-    # This step deploys the new version of our container image
-  # in the hello-cloudbuild Kubernetes Engine cluster.
+    
+    # deploy container image to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+    - run
+    - --filename=manifest/
+    - --image=gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:$COMMIT_SHA
+    - --location=us-central1-a
+    - --cluster=cloud-computing-assignment
+    
 #   - name: 'gcr.io/cloud-builders/kubectl'
-#     id: Deploy
-#     args:
-#     - 'gcloud container clusters get-credentials cloud-computing-assignment --zone us-central1-a --project cloud-computing-project-2022' 
-    
-#     #--zone $CLOUDSDK_COMPUTE_REGION-a'
-#     - 'apply'
-#     - '-f'
-#     - '/manifest/kube-b.yml'
-    
-    
+#     id: 'Deploy Image'
+#     args: ['apply', '-f', 'manifest/']
 #     env:
 #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-#     - 'CLOUDSDK_COMPUTE_REGION=us-central1'
 #     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
-#    - name: 'gcr.io/cloud-builders/kubectl'
-#     id: Destroy
-#     args:
-#     - 'delete'
-#     - '-f'
-#     - '/manifest/kube-b.yml'
-#     env:
-#     - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-#     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
-#   # [END cloudbuild_go_yaml]
+
 
 # Store images in Google Artifact Registry
 images:
