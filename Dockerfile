@@ -49,7 +49,7 @@ FROM gcr.io/distroless/base
 COPY --from=builder /build/main /build/main
 
 # Run the web service on container startup.
-CMD ["/build/main"]
+CMD ["./build/main"]
 
 # [END run_helloworld_dockerfile]
 # [END cloudrun_helloworld_dockerfile]
