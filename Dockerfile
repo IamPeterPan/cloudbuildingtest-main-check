@@ -1,32 +1,10 @@
-# FROM golang:1.16-buster as builder
-
-# WORKDIR /
-# COPY go.mod ./
-# COPY go.sum ./
-# # ADD . /
-# # COPY *.go ./
-# RUN go mod download
-# COPY . .
-
-# RUN go build -o main 
-# # -a /main.go
-# FROM debian:buster-slim
-# RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#     ca-certificates && \
-#     rm -rf /var/lib/apt/lists/*
-# # FROM gcr.io/distroless/base
-# COPY --from=builder /main /
-# # EXPOSE 8080
-# ENTRYPOINT [ "/main" ]
-
-
-# Copyright 2021 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,30 +12,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build the manager binary
-FROM golang:1.15 as builder
+# [START cloudrun_helloworld_dockerfile]
+# [START run_helloworld_dockerfile]
 
-WORKDIR /workspace
-# Copy the Go Modules manifests
-COPY go.mod go.mod
-COPY go.sum go.sum
-# cache deps before building and copying source so that we don't need to re-download as much
-# and so that source changes don't invalidate our downloaded layer
+# Use the offical golang image to create a binary.
+# This is based on Debian and sets the GOPATH to /go.
+# https://hub.docker.com/_/golang
+FROM golang:1.17-buster as builder
+
+# Create and change to the app directory.
+WORKDIR /app
+
+# Retrieve application dependencies.
+# This allows the container build to reuse cached dependencies.
+# Expecting to copy go.mod and if present go.sum.
+COPY go.* ./
 RUN go mod download
 
-# Copy the go source
-COPY main.go main.go
-COPY api/ api/
-COPY controllers/ controllers/
+# Copy local code to the container image.
+COPY . ./
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o manager main.go
+# Build the binary.
+RUN go build -v -o server
 
-# Use distroless as minimal base image to package the manager binary
-# Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM gcr.io/distroless/static:nonroot
-WORKDIR /
-COPY --from=builder /workspace/manager .
-USER nonroot:nonroot
+# Use the official Debian slim image for a lean production container.
+# https://hub.docker.com/_/debian
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+FROM debian:buster-slim
+RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["/manager"]
+# Copy the binary to the production image from the builder stage.
+COPY --from=builder /app/server /app/server
+
+# Run the web service on container startup.
+CMD ["/app/server"]
+
+# [END run_helloworld_dockerfile]
+# [END cloudrun_helloworld_dockerfile]
