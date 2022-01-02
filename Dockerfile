@@ -1,6 +1,6 @@
 FROM golang:1.16-buster as builder
 
-WORKDIR /build
+WORKDIR /
 COPY go.mod ./
 COPY go.sum ./
 # ADD . /
@@ -15,6 +15,6 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 # FROM gcr.io/distroless/base
-COPY --from=builder build/main /
+COPY --from=builder /main /
 # EXPOSE 8080
-ENTRYPOINT [ "/build/main" ]
+ENTRYPOINT [ "/main" ]
