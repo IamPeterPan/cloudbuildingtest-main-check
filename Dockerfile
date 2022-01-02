@@ -21,7 +21,7 @@
 FROM golang:1.17-buster as builder
 
 # Create and change to the app directory.
-WORKDIR /app
+WORKDIR /build
 
 # Retrieve application dependencies.
 # This allows the container build to reuse cached dependencies.
@@ -33,7 +33,7 @@ RUN go mod download
 COPY . ./
 
 # Build the binary.
-RUN go build -v -o server
+RUN go build -v -o main
 
 # Use the official Debian slim image for a lean production container.
 # https://hub.docker.com/_/debian
@@ -44,10 +44,10 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
     rm -rf /var/lib/apt/lists/*
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/server /app/server
+COPY --from=builder /build/main /build/main
 
 # Run the web service on container startup.
-CMD ["/app/server"]
+CMD ["/build/main"]
 
 # [END run_helloworld_dockerfile]
 # [END cloudrun_helloworld_dockerfile]
