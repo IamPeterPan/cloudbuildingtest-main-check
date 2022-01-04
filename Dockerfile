@@ -39,7 +39,7 @@ RUN go build -v -o main
 # https://hub.docker.com/_/debian
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM gcr.io/distroless/base
-
+RUN apk update && apk --no-cache --update add ca-certificates
 # FROM debian:buster-slim
 # RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 #     ca-certificates && \
@@ -47,7 +47,7 @@ FROM gcr.io/distroless/base
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /build/main /build/main
-
+RUN chmod a+x /build/main
 # Run the web service on container startup.
 CMD ["./build/main"]
 
