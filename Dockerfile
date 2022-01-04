@@ -30,26 +30,24 @@ COPY go.* ./
 RUN go mod download
 
 # Copy local code to the container image.
-COPY . ./
+COPY *.go ./
 
 # Build the binary.
-RUN go build -v -o main
+RUN go build -o /main
 
 # Use the official Debian slim image for a lean production container.
-# https://hub.docker.com/_/debian
+# https://hub.docker.com/_/base
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM gcr.io/distroless/base
-RUN apk update && apk --no-cache --update add ca-certificates
-# FROM debian:buster-slim
-# RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#     ca-certificates && \
-#     rm -rf /var/lib/apt/lists/*
+FROM gcr.io/distroless/base-debian10
+
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /build/main /build/main
-RUN chmod a+x /build/main
+# RUN chmod a+x /build/main
+EXPOSE 8080
+USER nonroot:nonroot
 # Run the web service on container startup.
-CMD ["./build/main"]
+CMD ["/build/main"]
 
 # [END run_helloworld_dockerfile]
 # [END cloudrun_helloworld_dockerfile]
