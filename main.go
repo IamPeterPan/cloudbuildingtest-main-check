@@ -34,13 +34,16 @@ func main() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	name := os.Getenv("NAME")
-	today := time.Now().Format("15:04:05")
+	today := time.Now().Format("2006-02-01")
 	Time := time.Now().Format("15:04:05")
 	if name == "" {
 
 		name = fmt.Sprint("BTC ", rand.Intn(100))
 	}
-	fmt.Fprintf(w, today,Time , name)
+
+	var finalresult = fmt.Sprint(today, " ,", Time, " ,", name)
+	fmt.Fprintf(w, finalresult)
+	
 	
 
 }
