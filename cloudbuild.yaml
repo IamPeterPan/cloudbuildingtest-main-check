@@ -46,7 +46,7 @@
     
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Deploy Image'
-    args: ['apply', '-f', 'manifest/kube-b.yml']
+    args: ['apply', '-f', 'manifest/']
     env:
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
     - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-computing-assignment'
