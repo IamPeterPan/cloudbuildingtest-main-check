@@ -40,7 +40,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		
 		name ="BTC 1"
 	}
-	fmt.Fprintf(w, today, " ,\n ",currUTCTimeInString , " ,\n ", name)
+	fmt.Fprintf(w, today,currUTCTimeInString , name)
 	
 
 }
