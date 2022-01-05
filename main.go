@@ -7,6 +7,7 @@ import (
     "log"
     "os"
     "time"
+    "math/rand"
 )
 
 
@@ -33,11 +34,11 @@ func main() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	name := os.Getenv("NAME")
-	today := time.Now().Format("01-02-2006")
-	Time:=time.now().Format("15:04:05")
+	today := time.Now().Format("15:04:05")
+	Time := time.Now().Format("15:04:05")
 	if name == "" {
-		
-		name ="BTC 1"
+
+		name = fmt.Sprint("BTC ", rand.Intn(100))
 	}
 	fmt.Fprintf(w, today,Time , name)
 	
