@@ -30,7 +30,7 @@
     args:
     - 'build'
     - '-t'
-    - 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
     - '.'
   # pushes the image to Container Registry
    # The PROJECT_ID and SHORT_SHA variables are automatically replaced by Cloud Build.
@@ -38,7 +38,7 @@
     id: 'Push Image'
     args:
     - 'push'
-    - 'gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
     
     
   # This step deploys the new version of our container image
@@ -54,7 +54,7 @@
 
 # Store images in Google Artifact Registry
 images:
-  - gcr.io/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1
   
   
   
