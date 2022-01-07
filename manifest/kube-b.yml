@@ -35,7 +35,9 @@ spec:
             periodSeconds: 5
       volumes:
         - name: cloud-computing-volume
-          emptyDir: {}
+          gitRepo:
+            repository: "https://github.com/IamPeterPan/Cloud_Computing_Assignment.git"
+            revision: "cloud-computing-assignment22f1d8406d464b0c0874075539c1f2e96c253775"
           
       
 ---
