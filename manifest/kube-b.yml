@@ -22,8 +22,8 @@ spec:
         - name: cloud-computing-assignment
           image: 'us-central1-docker.pkg.dev/cloud-computing-project-2022/cloudbuildingtest-main-check/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
           volumeMounts:
-          - mountPath: /artifacts.cloud-computing-project-2022.appspot.com/kubernatelogs/logs
-            name: cache-volume
+          - mountPath: /cloud-computing-assignment-v1
+            name: cloud-computing-volume
           
           ports:
             - containerPort: 8080
@@ -34,8 +34,10 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
       volumes:
-        - name: cache-volume
-          emptyDir: {}
+        - name: cloud-computing-volume
+          gcePersistentDisk:
+            pdName: cloud-computing-data-disk
+            fsType: ext4
       
 ---
 apiVersion: v1
