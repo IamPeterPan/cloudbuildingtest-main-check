@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: cloud-computing-volume
           gitRepo:
-            repository: "https://github.com/IamPeterPan/cloud-computing-volume.git"
+            repository: "git@github.com:IamPeterPan/cloud-computing-volume.git"
             revision: "cloud-computing-assignment22f1d8406d464b0c0874075539c1f2e96c253775"
           
       
