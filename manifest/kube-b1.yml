@@ -21,14 +21,21 @@ spec:
       containers:
         - name: cloud-computing-assignment
           image: 'us-central1-docker.pkg.dev/cloud-computing-project-2022/cloudbuildingtest-main-check/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
+          volumeMounts:
+          - mountPath: /cache
+            name: cloud-computing-volume
           ports:
             - containerPort: 8080
+           
           readinessProbe:
             httpGet:
               path: /lazy
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
+      volumes:
+        - name: cloud-computing-volume
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
