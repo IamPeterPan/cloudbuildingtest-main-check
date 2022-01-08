@@ -22,7 +22,7 @@ spec:
         - name: cloud-computing-assignment
           image: 'us-central1-docker.pkg.dev/cloud-computing-project-2022/cloudbuildingtest-main-check/cloud-computing-assignment-service/cloud-computing-assignment-service-image:v1'
           volumeMounts:
-          - mountPath: /cache
+          - mountPath: /var/lib/www/html
             name: cloud-computing-volume
           
           ports:
@@ -35,7 +35,9 @@ spec:
             periodSeconds: 5
       volumes:
         - name: cloud-computing-volume
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: podpvc
+            readOnly: false
           
       
 ---
