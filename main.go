@@ -42,8 +42,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var finalresult = fmt.Sprint(today, " ,", Time, " ,", name)
-	fmt.Println(finalresult)
-	fmt.Fprintf(w, today,Time , name)
+	t := strings.Replace(finalresult, "%!(EXTRA string=", " ", -1)
+	t1 := strings.Replace(t, " string=", " ", -1)
+	
+	fmt.Fprintf(w, "%s\n",t1)
 	
 	
 
