@@ -46,7 +46,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	t := strings.Replace(finalresult, "%!(EXTRA string=", " ", -1)
 	t1 := strings.ReplaceAll(t, " string=", "")
 	
-	fmt.Fprintf(w, "%s\n",t1)
+	fmt.Fprintf(w, t1)
 	
 	
 
