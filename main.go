@@ -64,7 +64,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			log.Fatalln("error writing record to file", err)
 		}
 	}
-	fmt.Fprintf(w, records)
+	fmt.Fprintf(w, today, Time, name)
 	
 	
 	
