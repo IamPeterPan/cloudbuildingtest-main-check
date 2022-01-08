@@ -24,6 +24,8 @@ spec:
           volumeMounts:
           - mountPath: /cloud-computing-assignment
             name: cloud-computing-volume
+            accessModes:
+              - ReadOnlyMany
           
           ports:
             - containerPort: 8080
@@ -38,6 +40,7 @@ spec:
           gcePersistentDisk:
                 pdName: cloud-computing-assignment-data-disk
                 fsType: ext4
+                readOnly: true
                 
           
       
