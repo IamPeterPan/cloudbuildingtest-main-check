@@ -8,6 +8,7 @@ import (
     "os"
     "time"
     "math/rand"
+    "strings"
 )
 
 
@@ -41,9 +42,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		name = fmt.Sprint("BTC ", rand.Intn(100))
 	}
 
-	var finalresult = fmt.Sprint(today, " ,", Time, " ,", name)
+	var finalresult = fmt.Sprint(today,  Time,  name)
 	t := strings.Replace(finalresult, "%!(EXTRA string=", " ", -1)
-	t1 := strings.Replace(t, " string=", " ", -1)
+	t1 := strings.ReplaceAll(t, " string=", " ", -1)
 	
 	fmt.Fprintf(w, "%s\n",t1)
 	
