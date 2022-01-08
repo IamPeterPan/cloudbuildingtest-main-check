@@ -42,7 +42,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var finalresult = fmt.Sprint(today, " ,", Time, " ,", name)
-	fmt.Fprintf(w, finalresult)
+	fmt.Println(finalresult)
+	fmt.Fprintf(w, today,Time , name)
 	
 	
 
