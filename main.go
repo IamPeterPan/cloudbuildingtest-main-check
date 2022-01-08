@@ -42,11 +42,29 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		name = fmt.Sprint("BTC ", rand.Intn(100))
 	}
 
-	var finalresult = fmt.Sprint(today,  Time,  name)
-	t := strings.Replace(finalresult, "%!(EXTRA string=", " ", -1)
-	t1 := strings.ReplaceAll(t, " string=", "")
+	records := [][]string{
+		{"Date", "Time", "Currancy"},
+		{today, Time, name},
+	}
+
+	f, err := os.Create("users.csv")
+	defer f.Close()
+
+	if err != nil {
+
+		log.Fatalln("failed to open file", err)
+	}
+
+	w := csv.NewWriter(f)
+	defer w.Flush()
+
+	for _, record := range records {
+		if err := w.Write(record); err != nil {
+			log.Fatalln("error writing record to file", err)
+		}
+	}
+	fmt.Fprintf(w, records)
 	
-	fmt.Fprintf(w, t1)
 	
 	
 
