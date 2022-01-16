@@ -24,7 +24,7 @@
   #-t is the Docker tag
   #<preffered_image_name> is the name of the image to be built
   #. is the location of the source code
-  
+  #This is a comment
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build'
     args:
